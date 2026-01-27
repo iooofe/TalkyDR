@@ -34,7 +34,7 @@ class LoginSerializer(serializers.Serializer):
         username = attrs.get('username')
         password = attrs.get('password')
 
-        if username and password:
+        if username and password:   
             user = authenticate(username=username, password=password)
             if not user:
                 raise serializers.ValidationError("Неверное имя пользователя или пароль")

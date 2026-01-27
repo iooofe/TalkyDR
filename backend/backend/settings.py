@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
-"""
+""" 
 
 from pathlib import Path
 
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-dh93e4em%2o_(+2e)j$n-9)380o)bxspi6c3sl_u1fi8z5rjv0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost",]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "*"]
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'accounts'
+    'accounts',
+    'posts',
 ]
 
 MIDDLEWARE = [
@@ -148,4 +149,7 @@ REST_FRAMEWORK = {
     ),
 }
 
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
