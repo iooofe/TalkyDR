@@ -22,7 +22,7 @@ const RegistrationPage = () => {
     setIsSubmitting(true);
 
     try {
-      const res = await fetch(`${API_BASE}/account/registration/`, {
+      const res = await fetch(`${API_BASE}/api/account/registration/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password, password2 }),
