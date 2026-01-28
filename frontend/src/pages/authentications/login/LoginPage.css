@@ -1,11 +1,11 @@
-.registration-page-container {
+.login-page-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
 
-.registration-page-card {
+.login-page-card {
     z-index: 1;
     position: relative;
     margin: 1rem;
@@ -21,7 +21,7 @@
 
 
 
-.registration-page-card::after {
+.login-page-card::after {
     content: "";
     position: absolute;
     z-index: -1;
@@ -36,27 +36,27 @@
         transform 0.5s ease;
 }
 
-.registration-page-card:hover::after {
+.login-page-card:hover::after {
     opacity: 1;
     transform: scale(1);
 }
 
-.registration-page-card:hover {
+.login-page-card:hover {
     box-shadow: none;
 }
 
-.registration-page-card label {
+.login-page-card label {
     display: flex;
     flex-direction: column;
     align-items: start;
     width: 100%;
 }
 
-.registration-page-card .field-label {
+.login-page-card .field-label {
     margin: .8rem;
 }
 
-.registration-page-card input {
+.login-page-card input {
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 1rem;
@@ -64,18 +64,18 @@
     transition: all 0.5s;
 }
 
-.registration-page-card input:focus-visible {
+.login-page-card input:focus-visible {
     outline: none;
     border-color: #ff424d;
     box-shadow: 0 0 1rem 0.2rem rgba(255, 66, 77, 0.5)
 }
 
-.registration-page-card input:hover {
+.login-page-card input:hover {
     outline: none;
     border-color: #ff424d;
 }
 
-.registration-page-card button {
+.login-page-card button {
     margin-top: 2rem;
     padding: 1rem;
     border: 0;
@@ -89,24 +89,23 @@
     font-weight: 600;
 }
 
-.registration-page-card button:hover {
+.login-page-card button:hover {
     box-shadow: 0 0 1rem 0.2rem rgba(255, 66, 77, 0.5)
 }
 
-.registration-page-card h1 {
+.login-page-card h1 {
     font-size: 3rem;
     font-weight: 600;
     margin: 0.5rem;
 }
 
-
-.registration-page-card h2 {
+.login-page-card h2 {
     font-size: 1.5rem;
     font-weight: 400;
     margin: .5rem;
 }
 
-.registration-page-card form {
+.login-page-card form {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -114,14 +113,14 @@
     gap: 1rem;
 }
 
-.login-link {
+.registration-link {
     position: relative;
     color: #ff424d;
     text-decoration: none;
     transition: all ease 0.5s;
 }
 
-.login-link::after {
+.registration-link::after {
     content: "";
     position: absolute;
     left: 0;
@@ -134,21 +133,10 @@
     transition: transform 0.3s ease;
 }
 
-.login-link:hover::after {
+.registration-link:hover::after {
     transform: scaleX(1);
 }
 
-.registration-page-card p {
+.login-page-card p {
     margin-top: 2rem;
-
-}
-
-.field-error {
-    color: #ff5a5a;
-    margin-top: 1rem;
-}
-
-.form-error {
-    color: #ff5a5a;
-    margin-bottom: 1rem;
 }
