@@ -1,5 +1,5 @@
 :root {
-  font-family: Roboto, sans-serif;
+  font-family: "Work Sans", sans-serif;
   line-height: 1.5;
 }
 
@@ -12,9 +12,12 @@
 html,
 body {
   height: 100vh;
-  font-family: Roboto, sans-serif;
 }
 
 #root {
   height: 100vh;
-} 
+}
+
+h1 {
+  color: #ff424d;
+}
