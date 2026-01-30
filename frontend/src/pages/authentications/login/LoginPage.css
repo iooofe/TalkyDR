@@ -140,3 +140,13 @@
 .login-page-card p {
     margin-top: 2rem;
 }
+
+.field-error {
+    color: #ff5a5a;
+    margin-top: 1rem;
+}
+
+.form-error {
+    color: #ff5a5a;
+    margin-bottom: 1rem;
+}

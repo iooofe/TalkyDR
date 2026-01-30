@@ -42,7 +42,7 @@ const RegistrationPage = () => {
       localStorage.setItem("access", data.access);
       localStorage.setItem("refresh", data.refresh);
 
-      navigate("/login", { replace: true });
+      navigate("/myprofile", { replace: true });
     } catch (err) {
       setFormError("Сервер недоступен");
     } finally {
