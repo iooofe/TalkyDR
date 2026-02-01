@@ -15,35 +15,9 @@
     width: 50rem;
     border-radius: 1rem;
     padding: 1.5rem;
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
-    transition: border 0.5s ease, box-shadow 0.5s ease;
+    border: 1px solid var(--primary);
 }
 
-
-
-.registration-page-card::after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    inset: -8px;
-    border-radius: 1.2rem;
-    border: 1px solid #ccc;
-
-    opacity: 0;
-    transform: scale(0.98);
-    transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
-}
-
-.registration-page-card:hover::after {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.registration-page-card:hover {
-    box-shadow: none;
-}
 
 .registration-page-card label {
     display: flex;
@@ -58,21 +32,10 @@
 
 .registration-page-card input {
     padding: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--primary);
     border-radius: 1rem;
     width: 100%;
     transition: all 0.5s;
-}
-
-.registration-page-card input:focus-visible {
-    outline: none;
-    border-color: #ff424d;
-    box-shadow: 0 0 1rem 0.2rem rgba(255, 66, 77, 0.5)
-}
-
-.registration-page-card input:hover {
-    outline: none;
-    border-color: #ff424d;
 }
 
 .registration-page-card button {
@@ -80,7 +43,7 @@
     padding: 1rem;
     border: 0;
     border-radius: 1rem;
-    background-color: #ff424d;
+    background-color: var(--primary);
     color: #fff;
     cursor: pointer;
     width: 100%;
@@ -90,7 +53,8 @@
 }
 
 .registration-page-card button:hover {
-    box-shadow: 0 0 1rem 0.2rem rgba(255, 66, 77, 0.5)
+    background-color: var(--accent);
+    color: #fff;
 }
 
 .registration-page-card h1 {
@@ -116,7 +80,7 @@
 
 .login-link {
     position: relative;
-    color: #ff424d;
+    color: #579dff;
     text-decoration: none;
     transition: all ease 0.5s;
 }
@@ -144,11 +108,11 @@
 }
 
 .field-error {
-    color: #ff5a5a;
+    color: var(--primary);
     margin-top: 1rem;
 }
 
 .form-error {
-    color: #ff5a5a;
+    color: var(--primary);
     margin-bottom: 1rem;
 }

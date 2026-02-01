@@ -5,16 +5,14 @@
 
 .header-card {
     z-index: 1;
-    margin: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100rem;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
-    transition: border 0.5s ease, box-shadow 0.5s ease;
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--primary);
 }
+
 
 .header-navigation {
     display: flex;
@@ -31,7 +29,7 @@
 
 .header-img-link {
     position: relative;
-    color: #ff424d;
+    color: var(--primary);
     text-decoration: none;
     transition: all ease 0.5s;
 }

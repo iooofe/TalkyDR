@@ -1,6 +1,9 @@
 :root {
   font-family: "Work Sans", sans-serif;
   line-height: 1.5;
+  --primary: #1F1F1F;
+  --accent: #444444;
+
 }
 
 * {
@@ -19,5 +22,5 @@ body {
 }
 
 h1 {
-  color: #ff424d;
+  color: var(--primary);
 }
