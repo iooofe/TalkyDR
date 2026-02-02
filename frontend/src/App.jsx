@@ -5,6 +5,7 @@ import MyProfile from './pages/main/myprofile/MyprofilePage'
 import RequireAuth from './pages/components/RequireAuth'
 import Authlayout from './pages/layouts/Authlayout'
 import Mainlayout from './pages/layouts/Mainlayout'
+import Feed from './pages/main/feed/Feed'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
 
         <Route element={<Mainlayout />}>
           <Route path="/myprofile" element={<RequireAuth><MyProfile /></RequireAuth>} />
+          <Route path="/feed" element={<RequireAuth><Feed /></RequireAuth>} />
         </Route>
       </Routes>
     </BrowserRouter>

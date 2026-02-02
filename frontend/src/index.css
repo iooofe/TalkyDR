@@ -24,3 +24,9 @@ body {
 h1 {
   color: var(--primary);
 }
+
+hr {
+  width: 80%;
+  margin: 1rem;
+  background-color: rgba(31, 31, 31, 0.5);
+}

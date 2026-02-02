@@ -34,7 +34,7 @@ const LoginPage = () => {
 
         setIsSubmitting(true)
         try {
-            const res = await fetch(`${API_BASE}api/account/login/`, {
+            const res = await fetch(`${API_BASE}/api/account/login/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
@@ -55,7 +55,8 @@ const LoginPage = () => {
 
             localStorage.setItem('access', data.access)
             localStorage.setItem('refresh', data.refresh)
-            navigate(from, { replace: true })
+
+            navigate('/myprofile', { replace: true })
         } catch (error) {
             setFormError('Сервер недоступен')
         } finally {
@@ -67,6 +68,7 @@ const LoginPage = () => {
         <div className="login-page-container">
             <div className="login-page-card">
                 <h1>Talky</h1>
+                <hr />
                 <h2>Войдите в аккаунт</h2>
                 {formError ? <p className="form-error">{formError}</p> : null}
                 <form onSubmit={handleSubmit}>

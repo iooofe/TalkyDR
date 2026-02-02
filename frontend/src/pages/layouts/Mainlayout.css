@@ -1,0 +1,23 @@
+.main-layout-wrapper {
+    display: grid;
+    grid-template-columns: 18rem 1fr;
+    grid-template-rows: 5rem 1fr;
+    grid-template-areas:
+        "sidebar header"
+        "sidebar content";
+    height: 100%;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.header {
+    grid-area: header;
+}
+
+.content {
+    grid-area: content;
+}

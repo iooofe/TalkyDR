@@ -15,9 +15,32 @@
     width: 50rem;
     border-radius: 1rem;
     padding: 1.5rem;
-    border: 1px solid var(--primary);
+    box-shadow: 0 0 10px 0 rgba(31, 31, 31, 0.5);
+    transition: all 0.5s ease;
+
+}
+.registration-page-card:hover::after {
+    opacity: 1;
+    transform: scale(1);
 }
 
+.registration-page-card:hover {
+    box-shadow: none;
+}
+.registration-page-card::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -8px;
+    border-radius: 1.2rem;
+    border: 1px solid var(--primary);
+
+    opacity: 0;
+    transform: scale(0.98);
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+}
 
 .registration-page-card label {
     display: flex;
@@ -32,10 +55,17 @@
 
 .registration-page-card input {
     padding: 1rem;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--accent);
     border-radius: 1rem;
     width: 100%;
     transition: all 0.5s;
+    outline: none;
+}
+
+.registration-page-card input:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 5px .5px rgba(31, 31, 31, 1);
 }
 
 .registration-page-card button {
@@ -53,8 +83,7 @@
 }
 
 .registration-page-card button:hover {
-    background-color: var(--accent);
-    color: #fff;
+    box-shadow: 0 0 15px 5px rgba(31, 31, 31, 0.5);
 }
 
 .registration-page-card h1 {

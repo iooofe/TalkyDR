@@ -54,8 +54,8 @@ const RegistrationPage = () => {
     <div className="registration-page-container">
       <div className="registration-page-card">
         <h1>Talky</h1>
+        <hr />
         <h2>Создайте аккаунт</h2>
-
         {formError ? <p className="form-error">{formError}</p> : null}
 
         <form onSubmit={handleSubmit}>
