@@ -67,9 +67,11 @@ const LoginPage = () => {
     return (
         <div className="login-page-container">
             <div className="login-page-card">
-                <h1>Talky</h1>
-                <hr />
-                <h2>Войдите в аккаунт</h2>
+                <div className="header">
+                    <h1>Talky</h1>
+                    <h3>Войдите в аккаунт</h3>
+                </div>
+                <div className = "main" >
                 {formError ? <p className="form-error">{formError}</p> : null}
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="username"><span className="field-label">Никнейм</span>
@@ -100,8 +102,9 @@ const LoginPage = () => {
                 </form>
                 <p>Нет аккаунта? <Link to="/registration" className="registration-link">Зарегистрироваться</Link></p>
             </div>
+            </div>
         </div>
     )
-}   
+}
 
 export default LoginPage

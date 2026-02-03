@@ -1,10 +1,9 @@
 import './MyprofilePage.css'
+import Me from './MyProfileComponents/Me/Me'
 
 const MyProfile = () => {
   return (
-    <div className="myprofile-page-card">
-      <h1>My Profile</h1>
-    </div>
+    <Me />
   )
 }
 

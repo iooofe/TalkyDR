@@ -53,72 +53,74 @@ const RegistrationPage = () => {
   return (
     <div className="registration-page-container">
       <div className="registration-page-card">
-        <h1>Talky</h1>
-        <hr />
-        <h2>Создайте аккаунт</h2>
+        <div className="header">
+          <h1>Talky</h1>
+          <h2>Создайте аккаунт</h2>
+        </div>
         {formError ? <p className="form-error">{formError}</p> : null}
+        <div className="main">
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="username">
+              <span className="field-label">Придумайте никнейм</span>
+              <input
+                id="username"
+                type="text"
+                placeholder="Никнейм"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                autoComplete="username"
+              />
+              {fieldErrors.username ? (
+                <p className="field-error">{String(fieldErrors.username)}</p>
+              ) : null}
+            </label>
 
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="username">
-            <span className="field-label">Придумайте никнейм</span>
-            <input
-              id="username"
-              type="text"
-              placeholder="Никнейм"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              autoComplete="username"
-            />
-            {fieldErrors.username ? (
-              <p className="field-error">{String(fieldErrors.username)}</p>
+            <label htmlFor="password">
+              <span className="field-label">Придумайте пароль</span>
+              <input
+                id="password"
+                type="password"
+                placeholder="Пароль"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new-password"
+              />
+              {fieldErrors.password ? (
+                <p className="field-error">{String(fieldErrors.password)}</p>
+              ) : null}
+            </label>
+
+            <label htmlFor="password2">
+              <span className="field-label">Подтвердите пароль</span>
+              <input
+                id="password2"
+                type="password"
+                placeholder="Подтвердите пароль"
+                value={password2}
+                onChange={(e) => setPassword2(e.target.value)}
+                autoComplete="new-password"
+              />
+              {fieldErrors.password2 ? (
+                <p className="field-error">{String(fieldErrors.password2)}</p>
+              ) : null}
+            </label>
+
+            {fieldErrors.non_field_errors ? (
+              <p className="field-error">{String(fieldErrors.non_field_errors)}</p>
             ) : null}
-          </label>
 
-          <label htmlFor="password">
-            <span className="field-label">Придумайте пароль</span>
-            <input
-              id="password"
-              type="password"
-              placeholder="Пароль"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="new-password"
-            />
-            {fieldErrors.password ? (
-              <p className="field-error">{String(fieldErrors.password)}</p>
-            ) : null}
-          </label>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "..." : "Зарегистрироваться"}
+            </button>
+          </form>
 
-          <label htmlFor="password2">
-            <span className="field-label">Подтвердите пароль</span>
-            <input
-              id="password2"
-              type="password"
-              placeholder="Подтвердите пароль"
-              value={password2}
-              onChange={(e) => setPassword2(e.target.value)}
-              autoComplete="new-password"
-            />
-            {fieldErrors.password2 ? (
-              <p className="field-error">{String(fieldErrors.password2)}</p>
-            ) : null}
-          </label>
-
-          {fieldErrors.non_field_errors ? (
-            <p className="field-error">{String(fieldErrors.non_field_errors)}</p>
-          ) : null}
-
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "..." : "Зарегистрироваться"}
-          </button>
-        </form>
-
-        <p>
-          Уже есть аккаунт?{" "}
-          <Link to="/login" className="login-link">
-            Войти
-          </Link>
-        </p>
+          <p>
+            Уже есть аккаунт?{" "}
+            <Link to="/login" className="login-link">
+              Войти
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
