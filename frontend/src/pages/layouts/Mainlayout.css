@@ -3,21 +3,45 @@
     grid-template-columns: 18rem 1fr;
     grid-template-rows: 5rem 1fr;
     grid-template-areas:
-        "sidebar header"
-        "sidebar content";
+        "sidebar-top header"
+        "sidebar-bottom content";
     height: 100%;
-    gap: 1rem;
+    gap: 0rem ;
+    padding: 2rem;
+}
+
+.sidebar-bottom {
+    grid-area: sidebar-bottom;
+    background-color: #ffffff;
+    border-right: 2px solid #d8d8d8;
+    overflow: hidden;
+    border-radius: 0 0 0 0.5rem;
     padding: 1rem;
 }
 
-.sidebar {
-    grid-area: sidebar;
+.sidebar-top {
+    grid-area: sidebar-top;
+    background-color: #ffffff;
+    border-right: 2px solid #d8d8d8;
+    overflow: hidden;
+    border-radius: 0.5rem 0 0 0;
+    border-bottom: 2px solid #d8d8d8;
+    padding: 1rem;
 }
+
 
 .header {
     grid-area: header;
+    background-color: #ebebeb;
+    border-bottom: 2px solid #d8d8d8;
+    border-radius: 0 0.5rem 0 0;
+    padding: 1rem;
 }
 
 .content {
     grid-area: content;
+    background-color: #ebebeb;
+    padding: 2rem;
+    border-radius: 0 0 .5rem 0;
+
 }
