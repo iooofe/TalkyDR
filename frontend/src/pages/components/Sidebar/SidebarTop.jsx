@@ -1,3 +1,5 @@
+import './SidebarTop.css';
+
 const SidebarTop = () => {
     return (
         <div className="sidebar-card">

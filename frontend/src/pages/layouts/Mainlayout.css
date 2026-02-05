@@ -1,4 +1,5 @@
 .main-layout-wrapper {
+    position: relative;
     display: grid;
     grid-template-columns: 18rem 1fr;
     grid-template-rows: 5rem 1fr;
@@ -10,38 +11,51 @@
     padding: 2rem;
 }
 
+.main-layout-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    pointer-events: none;
+}
+
 .sidebar-bottom {
     grid-area: sidebar-bottom;
-    background-color: #ffffff;
-    border-right: 2px solid #d8d8d8;
+    background-color: var(--bg-secondary);
+    border-right: 2px solid var(--border-main);
     overflow: hidden;
-    border-radius: 0 0 0 0.5rem;
+    border-radius: 0 0 0 1rem;
     padding: 1rem;
+    position: relative;
 }
 
 .sidebar-top {
     grid-area: sidebar-top;
-    background-color: #ffffff;
-    border-right: 2px solid #d8d8d8;
+    background-color: var(--bg-secondary);
+    border-right: 2px solid var(--border-main);
     overflow: hidden;
-    border-radius: 0.5rem 0 0 0;
-    border-bottom: 2px solid #d8d8d8;
+    border-radius: 1rem 0 0 0;
+    border-bottom: 2px solid var(--border-main);
     padding: 1rem;
+    position: relative;
 }
 
 
 .header {
     grid-area: header;
-    background-color: #ebebeb;
-    border-bottom: 2px solid #d8d8d8;
-    border-radius: 0 0.5rem 0 0;
+    background-color: var(--bg-secondary);
+    border-bottom: 2px solid var(--border-main);
+    border-radius: 0 1rem 0 0;
     padding: 1rem;
+    position: relative;
 }
 
 .content {
     grid-area: content;
-    background-color: #ebebeb;
+    background-color: var(--bg-secondary);
     padding: 2rem;
-    border-radius: 0 0 .5rem 0;
+    border-radius: 0 0 1rem 0;
+    position: relative;
 
 }

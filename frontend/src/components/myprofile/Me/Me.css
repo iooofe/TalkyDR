@@ -1,0 +1,45 @@
+.me-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 3rem;
+    padding: 1rem;
+    background-color: var(--bg-card);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.me-card h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.me-card p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.me-card .avatar {
+    background-color: var(--bg-hover);
+    border-radius: 50%;
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
+}
+
+.state {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+.me-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}

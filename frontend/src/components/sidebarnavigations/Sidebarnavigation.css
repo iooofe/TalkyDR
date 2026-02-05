@@ -1,0 +1,32 @@
+.navigation-text {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+
+a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    padding: 1rem;
+    width: 100%;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    color: var(--text-secondary);
+}
+
+a:hover {
+    background-color: var(--bg-hover);
+    color: var(--accent-hover);
+}
+
+a:active {
+    scale: 0.95;
+    transition: all 0.3s ease;
+}
+
+svg {
+    width: 2rem;
+    height: 2rem;
+}

@@ -1,5 +1,5 @@
 import './MyprofilePage.css'
-import Me from './MyProfileComponents/Me/Me'
+import Me from '../../../components/myprofile/Me/Me'
 
 const MyProfile = () => {
   return (
