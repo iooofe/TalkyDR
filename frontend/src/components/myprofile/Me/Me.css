@@ -3,8 +3,8 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    gap: 3rem;
-    padding: 1rem;
+    gap: 2rem;
+    padding: 2rem;
     background-color: var(--bg-card);
     border-radius: 1rem;
     box-shadow: var(--shadow-sm);
@@ -41,5 +41,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
 }
+
+.all-discription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    gap: .5rem;
+} 

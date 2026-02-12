@@ -10,16 +10,82 @@ const LoginPage = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [formError, setFormError] = useState('')
     const [fieldErrors, setFieldErrors] = useState({})
+    const [focused, setFocused] = useState({ username: false, password: false })
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
 
+    const isRussianText = (text) => /[А-Яа-яЁё]/.test(String(text))
+
+    const translateErrorText = (text) => {
+        const raw = String(text ?? '').trim()
+        if (!raw) return ''
+        if (isRussianText(raw)) return raw
+
+        const t = raw.toLowerCase()
+
+        if (
+            t.includes('no active account') ||
+            t.includes('unable to log in') ||
+            t.includes('invalid username or password') ||
+            t.includes('given credentials')
+        ) {
+            return 'Неверное имя пользователя или пароль'
+        }
+
+        if (t === 'this field may not be blank.' || t.includes('may not be blank')) {
+            return 'Это поле не может быть пустым.'
+        }
+        if (t === 'this field is required.' || t.includes('is required')) {
+            return 'Это поле обязательно.'
+        }
+
+        const minMatch = raw.match(/at least (\d+) characters?/i)
+        if (minMatch) return `Минимум ${minMatch[1]} символов.`
+
+        const maxMatch = raw.match(/no more than (\d+) characters?/i)
+        if (maxMatch) return `Максимум ${maxMatch[1]} символов.`
+
+        if (t.includes('a user with that username already exists')) {
+            return 'Пользователь с таким никнеймом уже существует.'
+        }
+        if (t.includes("the two password fields didn't match") || t.includes('passwords do not match')) {
+            return 'Пароли не совпадают.'
+        }
+        if (t.includes('this password is too common')) {
+            return 'Этот пароль слишком простой.'
+        }
+        if (t.includes('this password is entirely numeric')) {
+            return 'Пароль не должен состоять только из цифр.'
+        }
+        if (t.includes('this password is too short')) {
+            const m = raw.match(/at least (\d+) characters?/i)
+            return m ? `Пароль слишком короткий. Минимум ${m[1]} символов.` : 'Пароль слишком короткий.'
+        }
+
+        return 'Некорректные данные.'
+    }
+
     const formatError = (err) => {
-        if (!err) return ''
-        if (Array.isArray(err)) return err.filter(Boolean).join(' ')
-        if (typeof err === 'string') return err
-        if (typeof err === 'object') return JSON.stringify(err)
-        return String(err)
+        const flatten = (v) => {
+            if (!v) return []
+            if (Array.isArray(v)) return v.flatMap(flatten)
+            if (typeof v === 'string') return [v]
+            if (typeof v === 'number' || typeof v === 'boolean') return [String(v)]
+            if (typeof v === 'object') return [JSON.stringify(v)]
+            return [String(v)]
+        }
+
+        return flatten(err).map(translateErrorText).filter(Boolean).join(' ')
+    }
+
+    const clearFieldError = (fieldName) => {
+        setFieldErrors((prev) => {
+            if (!prev || !prev[fieldName]) return prev
+            const next = { ...prev }
+            delete next[fieldName]
+            return next
+        })
     }
 
     const handleSubmit = async (e) => {
@@ -28,7 +94,11 @@ const LoginPage = () => {
         setFieldErrors({})
 
         if (!username.trim() || !password) {
-            setFormError('Введите никнейм и пароль')
+            setFormError('')
+            setFieldErrors({
+                username: 'Введите никнейм и пароль',
+                password: 'Введите никнейм и пароль',
+            })
             return
         }
 
@@ -80,27 +150,49 @@ const LoginPage = () => {
                             name="username"
                             type="text"
                             autoComplete="username"
-                            placeholder="Никнейм"
+                            placeholder={
+                                fieldErrors.username && !focused.username
+                                    ? formatError(fieldErrors.username)
+                                    : 'Никнейм'
+                            }
                             value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            onChange={(e) => {
+                                setUsername(e.target.value)
+                                clearFieldError('username')
+                                if (formError) setFormError('')
+                            }}
+                            onFocus={() => setFocused((p) => ({ ...p, username: true }))}
+                            onBlur={() => setFocused((p) => ({ ...p, username: false }))}
+                            className={fieldErrors.username && !focused.username ? 'input-error' : ''}
+                            aria-invalid={Boolean(fieldErrors.username)}
                         />
                     </label>
-                    {fieldErrors.username ? <p className="field-error">{formatError(fieldErrors.username)}</p> : null}
                     <label htmlFor="password"><span className="field-label">Пароль</span>
                         <input
                             id="password"
                             name="password"
                             type="password"
                             autoComplete="current-password"
-                            placeholder="Пароль"
+                            placeholder={
+                                fieldErrors.password && !focused.password
+                                    ? formatError(fieldErrors.password)
+                                    : 'Пароль'
+                            }
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={(e) => {
+                                setPassword(e.target.value)
+                                clearFieldError('password')
+                                if (formError) setFormError('')
+                            }}
+                            onFocus={() => setFocused((p) => ({ ...p, password: true }))}
+                            onBlur={() => setFocused((p) => ({ ...p, password: false }))}
+                            className={fieldErrors.password && !focused.password ? 'input-error' : ''}
+                            aria-invalid={Boolean(fieldErrors.password)}
                         />
                     </label>
-                    {fieldErrors.password ? <p className="field-error">{formatError(fieldErrors.password)}</p> : null}
                     <button type="submit" disabled={isSubmitting}>{isSubmitting ? 'Вход...' : 'Войти'}</button>
                 </form>
-                <p>Нет аккаунта? <Link to="/registration" className="registration-link">Зарегистрироваться</Link></p>
+                <p className="auth-switch">Нет аккаунта? <Link to="/registration">Зарегистрироваться</Link></p>
             </div>
             </div>
         </div>

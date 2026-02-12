@@ -43,3 +43,41 @@ class LoginSerializer(serializers.Serializer):
 
         attrs['user'] = user
         return attrs
+
+class MeSerializer(serializers.ModelSerializer):
+    avatar = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "username",
+            "name",
+            "birth_date",
+            "age",
+            "discription",
+            "avatar",
+        )
+
+    def get_avatar(self, obj):
+        request = self.context.get("request")
+        if obj.avatar and hasattr(obj.avatar, "url"):
+            url = obj.avatar.url
+            return request.build_absolute_uri(url) if request else url
+        return None
+
+class EditProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            "name",
+            "discription",
+            "age",
+        )
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get("name", instance.name)
+        instance.discription = validated_data.get("discription", instance.discription)
+        instance.age = validated_data.get("age", instance.age)
+        instance.save()
+        return instance

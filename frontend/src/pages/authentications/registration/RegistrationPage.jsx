@@ -10,10 +10,90 @@ const RegistrationPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [focused, setFocused] = useState({
+    username: false,
+    password: false,
+    password2: false,
+  });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
   const [formError, setFormError] = useState("");
+
+  const isRussianText = (text) => /[А-Яа-яЁё]/.test(String(text));
+
+  const translateErrorText = (text) => {
+    const raw = String(text ?? "").trim();
+    if (!raw) return "";
+    if (isRussianText(raw)) return raw;
+
+    const t = raw.toLowerCase();
+
+    if (
+      t.includes("no active account") ||
+      t.includes("unable to log in") ||
+      t.includes("invalid username or password") ||
+      t.includes("given credentials")
+    ) {
+      return "Неверное имя пользователя или пароль";
+    }
+
+    if (t === "this field may not be blank." || t.includes("may not be blank")) {
+      return "Это поле не может быть пустым.";
+    }
+    if (t === "this field is required." || t.includes("is required")) {
+      return "Это поле обязательно.";
+    }
+
+    const minMatch = raw.match(/at least (\d+) characters?/i);
+    if (minMatch) return `Минимум ${minMatch[1]} символов.`;
+
+    const maxMatch = raw.match(/no more than (\d+) characters?/i);
+    if (maxMatch) return `Максимум ${maxMatch[1]} символов.`;
+
+    if (t.includes("a user with that username already exists")) {
+      return "Пользователь с таким никнеймом уже существует.";
+    }
+    if (t.includes("the two password fields didn't match") || t.includes("passwords do not match")) {
+      return "Пароли не совпадают.";
+    }
+    if (t.includes("this password is too common")) {
+      return "Этот пароль слишком простой.";
+    }
+    if (t.includes("this password is entirely numeric")) {
+      return "Пароль не должен состоять только из цифр.";
+    }
+    if (t.includes("this password is too short")) {
+      const m = raw.match(/at least (\d+) characters?/i);
+      return m
+        ? `Пароль слишком короткий. Минимум ${m[1]} символов.`
+        : "Пароль слишком короткий.";
+    }
+
+    return "Некорректные данные.";
+  };
+
+  const formatError = (err) => {
+    const flatten = (v) => {
+      if (!v) return [];
+      if (Array.isArray(v)) return v.flatMap(flatten);
+      if (typeof v === "string") return [v];
+      if (typeof v === "number" || typeof v === "boolean") return [String(v)];
+      if (typeof v === "object") return [JSON.stringify(v)];
+      return [String(v)];
+    };
+
+    return flatten(err).map(translateErrorText).filter(Boolean).join(" ");
+  };
+
+  const clearFieldError = (fieldName) => {
+    setFieldErrors((prev) => {
+      if (!prev || !prev[fieldName]) return prev;
+      const next = { ...prev };
+      delete next[fieldName];
+      return next;
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +112,11 @@ const RegistrationPage = () => {
 
       if (!res.ok) {
         if (data && typeof data === "object") {
-          setFieldErrors(data);
+          const topLevel = data?.detail || data?.non_field_errors;
+          if (topLevel) setFormError(formatError(topLevel));
+
+          const { detail, non_field_errors, ...rest } = data;
+          setFieldErrors(rest);
         } else {
           setFormError("Ошибка регистрации");
         }
@@ -55,24 +139,33 @@ const RegistrationPage = () => {
       <div className="registration-page-card">
         <div className="header">
           <h1>Talky</h1>
-          <h2>Создайте аккаунт</h2>
+          <h3>Создайте аккаунт</h3>
         </div>
-        {formError ? <p className="form-error">{formError}</p> : null}
         <div className="main">
+          {formError ? <p className="form-error">{formError}</p> : null}
           <form onSubmit={handleSubmit}>
             <label htmlFor="username">
               <span className="field-label">Придумайте никнейм</span>
               <input
                 id="username"
                 type="text"
-                placeholder="Никнейм"
+                placeholder={
+                  fieldErrors.username && !focused.username
+                    ? formatError(fieldErrors.username)
+                    : "Никнейм"
+                }
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  clearFieldError("username");
+                  if (formError) setFormError("");
+                }}
                 autoComplete="username"
+                onFocus={() => setFocused((p) => ({ ...p, username: true }))}
+                onBlur={() => setFocused((p) => ({ ...p, username: false }))}
+                className={fieldErrors.username && !focused.username ? "input-error" : ""}
+                aria-invalid={Boolean(fieldErrors.username)}
               />
-              {fieldErrors.username ? (
-                <p className="field-error">{String(fieldErrors.username)}</p>
-              ) : null}
             </label>
 
             <label htmlFor="password">
@@ -80,14 +173,23 @@ const RegistrationPage = () => {
               <input
                 id="password"
                 type="password"
-                placeholder="Пароль"
+                placeholder={
+                  fieldErrors.password && !focused.password
+                    ? formatError(fieldErrors.password)
+                    : "Пароль"
+                }
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  clearFieldError("password");
+                  if (formError) setFormError("");
+                }}
                 autoComplete="new-password"
+                onFocus={() => setFocused((p) => ({ ...p, password: true }))}
+                onBlur={() => setFocused((p) => ({ ...p, password: false }))}
+                className={fieldErrors.password && !focused.password ? "input-error" : ""}
+                aria-invalid={Boolean(fieldErrors.password)}
               />
-              {fieldErrors.password ? (
-                <p className="field-error">{String(fieldErrors.password)}</p>
-              ) : null}
             </label>
 
             <label htmlFor="password2">
@@ -95,30 +197,33 @@ const RegistrationPage = () => {
               <input
                 id="password2"
                 type="password"
-                placeholder="Подтвердите пароль"
+                placeholder={
+                  fieldErrors.password2 && !focused.password2
+                    ? formatError(fieldErrors.password2)
+                    : "Подтвердите пароль"
+                }
                 value={password2}
-                onChange={(e) => setPassword2(e.target.value)}
+                onChange={(e) => {
+                  setPassword2(e.target.value);
+                  clearFieldError("password2");
+                  if (formError) setFormError("");
+                }}
                 autoComplete="new-password"
+                onFocus={() => setFocused((p) => ({ ...p, password2: true }))}
+                onBlur={() => setFocused((p) => ({ ...p, password2: false }))}
+                className={fieldErrors.password2 && !focused.password2 ? "input-error" : ""}
+                aria-invalid={Boolean(fieldErrors.password2)}
               />
-              {fieldErrors.password2 ? (
-                <p className="field-error">{String(fieldErrors.password2)}</p>
-              ) : null}
             </label>
-
-            {fieldErrors.non_field_errors ? (
-              <p className="field-error">{String(fieldErrors.non_field_errors)}</p>
-            ) : null}
 
             <button type="submit" disabled={isSubmitting}>
               {isSubmitting ? "..." : "Зарегистрироваться"}
             </button>
           </form>
 
-          <p>
+          <p className="auth-switch">
             Уже есть аккаунт?{" "}
-            <Link to="/login" className="login-link">
-              Войти
-            </Link>
+            <Link to="/login">Войти</Link>
           </p>
         </div>
       </div>

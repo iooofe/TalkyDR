@@ -4,7 +4,7 @@
 }
 
 
-a {
+.sidebar-nav-link {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -16,17 +16,28 @@ a {
     color: var(--text-secondary);
 }
 
-a:hover {
+.sidebar-nav-link:hover {
     background-color: var(--bg-hover);
     color: var(--accent-hover);
 }
 
-a:active {
+.sidebar-nav-link:active {
     scale: 0.95;
     transition: all 0.3s ease;
 }
 
-svg {
+.sidebar-nav-link svg {
     width: 2rem;
     height: 2rem;
 }
+
+.sidebar-nav-link {
+    border-left: 2px solid transparent;
+}
+
+.sidebar-nav-link.is-active {
+    background-color: var(--bg-hover);
+    color: var(--accent-main);
+    border-left: 2px solid var(--accent-main);
+    transition: all 0.3s ease;
+  }

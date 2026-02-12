@@ -70,7 +70,22 @@ html,
 body {
   height: 100vh;
   background-color: var(--bg-main);
+  background-image:
+    radial-gradient(780px 520px at 18% 12%, var(--accent-soft) 0%, rgba(0, 0, 0, 0) 58%),
+    radial-gradient(820px 540px at 88% 18%, var(--accent-soft) 0%, rgba(0, 0, 0, 0) 60%),
+    linear-gradient(180deg, var(--bg-main) 0%, var(--bg-hover) 55%, var(--bg-main) 100%);
+  background-attachment: fixed;
   font-family: Roboto, sans-serif;
+}
+
+@supports (background: color-mix(in srgb, #000 50%, #fff 50%)) {
+  html,
+  body {
+    background-image:
+      radial-gradient(780px 520px at 18% 12%, color-mix(in srgb, var(--accent-soft) 60%, transparent) 0%, rgba(0, 0, 0, 0) 58%),
+      radial-gradient(820px 540px at 88% 18%, color-mix(in srgb, var(--bg-hover) 85%, var(--accent-glow) 15%) 0%, rgba(0, 0, 0, 0) 60%),
+      linear-gradient(180deg, var(--bg-main) 0%, var(--bg-hover) 55%, var(--bg-main) 100%);
+  }
 }
 
 #root {
