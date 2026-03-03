@@ -1,13 +1,21 @@
 .state-number {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: auto;
-    padding: 0.75rem 1rem; 
-    background-color: var(--bg-hover);
-    border-radius: 1rem;
-    border: 1px Solid var(--border-main);
-    color: var(--text-secondary);
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.95rem;
+  border: 1px solid var(--border-light);
+  background-color: var(--bg-card);
+  color: var(--text-secondary);
+}
+
+.state-number p {
+  font-size: 0.85rem;
+}
+
+.state-number h3 {
+  color: var(--accent-main);
+  font-size: 1.1rem;
 }

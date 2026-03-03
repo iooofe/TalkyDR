@@ -1,63 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+
 :root {
-  --bg-main: #121212;
-  --bg-secondary: #161616;
-  --bg-card: #1A1A1A;
-  --bg-hover: #222222;
-  --bg-active: #2A2A2A;
+  color-scheme: light;
+  --bg-main: #155eef;
+  --bg-secondary: #f8faff;
+  --bg-card: #ffffff;
+  --bg-hover: #f4f7ff;
+  --bg-active: #eaf0ff;
 
+  --accent-main: #155eef;
+  --accent-hover: #0f4fd0;
+  --accent-active: #0d43ad;
+  --accent-soft: rgba(21, 94, 239, 0.14);
+  --accent-glow: rgba(21, 94, 239, 0.25);
 
-  --accent-main: #FF9F1C;
-  --accent-hover: #FFB347;
-  --accent-active: #E8890C;
-  --accent-soft: rgba(255, 159, 28, 0.14);
-  --accent-glow: rgba(255, 159, 28, 0.35);
-
-
-  --text-main: #EAEAEA;
-  --text-secondary: #B5B5B5;
-  --text-muted: #8A8A8A;
-  --text-disabled: #5E5E5E;
-
+  --text-main: #101828;
+  --text-secondary: #344054;
+  --text-muted: #667085;
+  --text-disabled: #98a2b3;
 
   --link-color: var(--accent-main);
   --link-hover: var(--accent-hover);
 
-
-  --border-main: #2E2E2E;
-  --border-light: #3A3A3A;
+  --border-main: #d0d5dd;
+  --border-light: #e4e7ec;
   --border-focus: var(--accent-main);
 
-
-  --input-bg: #181818;
-  --input-bg-hover: #1F1F1F;
-  --input-bg-focus: #222222;
-  --input-border: #2E2E2E;
+  --input-bg: #ffffff;
+  --input-bg-hover: #f9faff;
+  --input-bg-focus: #ffffff;
+  --input-border: #d0d5dd;
   --input-border-focus: var(--accent-main);
   --input-text: var(--text-main);
-  --input-placeholder: #777777;
-
+  --input-placeholder: #98a2b3;
 
   --btn-bg: var(--accent-main);
   --btn-bg-hover: var(--accent-hover);
   --btn-bg-active: var(--accent-active);
-  --btn-text: #121212;
+  --btn-text: #ffffff;
 
-  --btn-secondary-bg: #1F1F1F;
-  --btn-secondary-hover: #2A2A2A;
-  --btn-secondary-text: var(--text-main);
+  --btn-secondary-bg: #eef3ff;
+  --btn-secondary-hover: #e3ebff;
+  --btn-secondary-text: #1d2939;
 
-
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
-  --shadow-accent: 0 0 20px var(--accent-glow);
-
-
-  --error-main: #E5484D;
-  --warning-main: #F2B705;
-  
-
+  --error-main: #d92d20;
+  --warning-main: #f79009;
 }
 
 * {
@@ -67,27 +54,29 @@
 }
 
 html,
+body,
+#root {
+  height: 100%;
+  overflow-x: hidden;
+}
+
 body {
-  height: 100vh;
   background-color: var(--bg-main);
   background-image:
-    radial-gradient(780px 520px at 18% 12%, var(--accent-soft) 0%, rgba(0, 0, 0, 0) 58%),
-    radial-gradient(820px 540px at 88% 18%, var(--accent-soft) 0%, rgba(0, 0, 0, 0) 60%),
-    linear-gradient(180deg, var(--bg-main) 0%, var(--bg-hover) 55%, var(--bg-main) 100%);
-  background-attachment: fixed;
-  font-family: Roboto, sans-serif;
+    radial-gradient(780px 540px at 8% 8%, rgba(255, 255, 255, 0.15) 0%, transparent 64%),
+    radial-gradient(760px 560px at 94% 16%, rgba(255, 255, 255, 0.1) 0%, transparent 68%),
+    linear-gradient(180deg, #155eef 0%, #1153d5 100%);
+  color: var(--text-main);
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  line-height: 1.4;
 }
 
-@supports (background: color-mix(in srgb, #000 50%, #fff 50%)) {
-  html,
-  body {
-    background-image:
-      radial-gradient(780px 520px at 18% 12%, color-mix(in srgb, var(--accent-soft) 60%, transparent) 0%, rgba(0, 0, 0, 0) 58%),
-      radial-gradient(820px 540px at 88% 18%, color-mix(in srgb, var(--bg-hover) 85%, var(--accent-glow) 15%) 0%, rgba(0, 0, 0, 0) 60%),
-      linear-gradient(180deg, var(--bg-main) 0%, var(--bg-hover) 55%, var(--bg-main) 100%);
-  }
+a {
+  color: var(--link-color);
 }
 
-#root {
-  height: 100vh;
+button,
+input,
+textarea {
+  font: inherit;
 }

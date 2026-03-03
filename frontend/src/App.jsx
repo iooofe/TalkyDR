@@ -21,7 +21,8 @@ function App() {
         <Route element={<Mainlayout />}>
           <Route path="/myprofile" element={<RequireAuth><MyProfile /></RequireAuth>} />
           <Route path="/feed" element={<RequireAuth><Feed /></RequireAuth>} />
-          <Route path="/editprofile" element={<RequireAuth><Editprofile /></RequireAuth>} />
+          <Route path="/settings" element={<RequireAuth><Editprofile /></RequireAuth>} />
+          <Route path="/editprofile" element={<Navigate to="/settings" replace />} />
         </Route>
       </Routes>
     </BrowserRouter>

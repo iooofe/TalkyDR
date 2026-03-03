@@ -115,7 +115,9 @@ const RegistrationPage = () => {
           const topLevel = data?.detail || data?.non_field_errors;
           if (topLevel) setFormError(formatError(topLevel));
 
-          const { detail, non_field_errors, ...rest } = data;
+          const rest = { ...data };
+          delete rest.detail;
+          delete rest.non_field_errors;
           setFieldErrors(rest);
         } else {
           setFormError("Ошибка регистрации");
@@ -127,7 +129,7 @@ const RegistrationPage = () => {
       localStorage.setItem("refresh", data.refresh);
 
       navigate("/myprofile", { replace: true });
-    } catch (err) {
+    } catch {
       setFormError("Сервер недоступен");
     } finally {
       setIsSubmitting(false);

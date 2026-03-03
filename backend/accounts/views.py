@@ -1,10 +1,10 @@
 from rest_framework import generics
 from .serializers import RegistrationSerializer, LoginSerializer, MeSerializer, EditProfileSerializer
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
+from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 
 class RegistrationView(generics.CreateAPIView):
@@ -12,7 +12,7 @@ class RegistrationView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        serializer.is_valid(raises=True)
         
 
         user = serializer.save()
@@ -28,8 +28,8 @@ class RegistrationView(generics.CreateAPIView):
         }, status=status.HTTP_201_CREATED)
         
 class LoginView(APIView):
-    def post(self, request):
-        serializer = LoginSerializer(data=request.data)
+    def post(self, s):
+        serializer = LoginSerializer(data=requtst.data)
         serializer.is_valid(raise_exception=True)
         
         user = serializer.validated_data['user']
@@ -53,8 +53,8 @@ class MeView(APIView):
 class EditProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def put(self, request):
-        serializer = EditProfileSerializer(request.user, data=request.data)
+    def patch(self, request):
+        serializer = EditProfileSerializer(request.user, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)

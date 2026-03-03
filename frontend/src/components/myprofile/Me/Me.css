@@ -1,53 +1,117 @@
 .me-card {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 2rem;
-    padding: 2rem;
-    background-color: var(--bg-card);
-    border-radius: 1rem;
-    box-shadow: var(--shadow-sm);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 1rem;
 }
 
-.me-card h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--text-main);
+.me-card-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 1rem;
+  background-color: var(--bg-card);
 }
 
-.me-card p {
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--text-secondary);
+.me-main-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.me-main-info h1 {
+  margin: 0;
+  word-break: break-word;
 }
 
 .me-card .avatar {
-    background-color: var(--bg-hover);
-    border-radius: 50%;
-    width: 8rem;
-    height: 8rem;
-    object-fit: cover;
+  width: 5.8rem;
+  height: 5.8rem;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--bg-active);
+  border: 2px solid var(--accent-soft);
+  flex-shrink: 0;
+}
+
+.me-card .avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.me-card h1 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.me-card .username {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.me-age {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.me-about {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1rem 1.1rem;
+  width: 100%;
+  border: 1px solid var(--border-light);
+  border-radius: 1rem;
+  background-color: var(--bg-card);
+}
+
+.me-about-title {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.me-about-text {
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.me-info-message {
+  color: var(--text-muted);
+}
+
+.me-error-message {
+  color: var(--error-main);
 }
 
 .state {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  width: 100%;
 }
 
-.me-card-header {
-    display: flex;
+@media (max-width: 640px) {
+  .me-card-top {
     flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
+    text-align: center;
+  }
 
-.all-discription {
-    display: flex;
-    flex-direction: column;
+  .me-main-info {
     align-items: center;
-    padding: 1.5rem;
-    gap: .5rem;
-} 
+  }
+
+  .state {
+    grid-template-columns: 1fr;
+  }
+}

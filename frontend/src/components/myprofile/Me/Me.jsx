@@ -42,7 +42,7 @@ function Me() {
 
         const data = await res.json();
         if (!cancelled) setProfile(data);
-      } catch (e) {
+      } catch {
         if (!cancelled) setErrorText("Сервер недоступен.");
       } finally {
         if (!cancelled) setLoading(false);
@@ -60,20 +60,31 @@ function Me() {
   const avatarSrc = profile?.avatar || "";
   const age = profile?.age || "";
   const discription = profile?.discription || "";
+  const initial = String(displayName).trim().charAt(0).toUpperCase() || "?";
 
   return (
     <div className="me-card">
-      <div className="me-card-header">
-        <img src={avatarSrc} alt="" className="avatar" />
-        <h1>{displayName}</h1>
-        <p className="username">{username ? `@${username}` : ""}</p>
-        <div className = "all-discription">
-        <p>{age} лет</p>
-        <p>{discription ? `${discription}` : '-'}</p>
+      <div className="me-card-top">
+        {avatarSrc ? (
+          <img src={avatarSrc} alt={displayName} className="avatar" />
+        ) : (
+          <div className="avatar avatar-placeholder">{initial}</div>
+        )}
+
+        <div className="me-main-info">
+          <h1>{displayName}</h1>
+          {username ? <p className="username">@{username}</p> : null}
+          <p className="me-age">{age ? `${age} лет` : "Возраст не указан"}</p>
         </div>
-        {loading ? <p>Загрузка профиля...</p> : null}
-        {errorText ? <p>{errorText}</p> : null}
       </div>
+
+      <div className="me-about">
+        <p className="me-about-title">О себе</p>
+        <p className="me-about-text">{discription || "Описание пока не добавлено"}</p>
+      </div>
+
+      {loading ? <p className="me-info-message">Загрузка профиля...</p> : null}
+      {errorText ? <p className="me-error-message">{errorText}</p> : null}
 
       <div className="state">
         <State />

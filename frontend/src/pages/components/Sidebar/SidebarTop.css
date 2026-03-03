@@ -1,12 +1,45 @@
-.sidebar-top h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--text-main);
-    letter-spacing: .1rem;
+.sidebar-card {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
 }
 
-.sidebar-top {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.brand-mark {
+  position: relative;
+  width: 2rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.65rem;
+  background: linear-gradient(145deg, #4a86ff 0%, #155eef 58%, #0d43ad 100%);
+  box-shadow: 0 10px 20px rgba(21, 94, 239, 0.28);
+}
+
+.brand-mark::before {
+  content: "";
+  position: absolute;
+  inset: 0.55rem;
+  border-radius: 0.35rem;
+  background: rgba(255, 255, 255, 0.85);
+  transform: rotate(40deg) translateX(0.02rem);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.brand-text h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  line-height: 1.1;
+}
+
+.brand-text p {
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }

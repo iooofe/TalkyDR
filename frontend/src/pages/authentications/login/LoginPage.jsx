@@ -1,5 +1,5 @@
 import './LoginPage.css'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 const API_BASE = 'http://127.0.0.1:8000'
@@ -12,8 +12,6 @@ const LoginPage = () => {
     const [fieldErrors, setFieldErrors] = useState({})
     const [focused, setFocused] = useState({ username: false, password: false })
     const navigate = useNavigate()
-    const location = useLocation()
-    const from = location.state?.from?.pathname || '/'
 
     const isRussianText = (text) => /[А-Яа-яЁё]/.test(String(text))
 
@@ -127,7 +125,7 @@ const LoginPage = () => {
             localStorage.setItem('refresh', data.refresh)
 
             navigate('/myprofile', { replace: true })
-        } catch (error) {
+        } catch {
             setFormError('Сервер недоступен')
         } finally {
             setIsSubmitting(false)

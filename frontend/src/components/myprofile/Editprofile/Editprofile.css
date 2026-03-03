@@ -1,86 +1,153 @@
 .editprofile-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
-    background-color: var(--bg-card);
-    border-radius: 1rem;
-    padding: 2rem;
-    box-shadow: var(--shadow-sm);
+  max-width: 40rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 1.05rem;
+  padding: 1.25rem;
+}
+
+.settings-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
 .editprofile-card h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--text-main);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
 }
 
-.editprofile-card form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    width: 100%;
+.settings-header p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.editprofile-card .settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: 100%;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.form-group-full {
+  grid-column: 1 / -1;
 }
 
 .form-group label {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-main);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
 }
 
 .form-group input {
-    background-color: var(--bg-hover);
-    border-radius: 1rem;
-    border: 1px solid var(--border-main);
-    padding: 1rem;
-    color: var(--text-main);
-    font-size: 1rem;
-    font-weight: 700;
-    width: 100%;
+  width: 100%;
+  background-color: var(--input-bg);
+  border-radius: 0.75rem;
+  border: 1px solid var(--input-border);
+  padding: 0.85rem 0.95rem;
+  color: var(--text-main);
+  transition: 0.2s ease;
 }
 
-.form-group input:focus {
-    outline: none;
-    border: 1px solid var(--accent-main);
-    background-color: var(--bg-hover);
-    transform: scale(1.01);
+.form-group textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 6.6rem;
+  background-color: var(--input-bg);
+  border-radius: 0.75rem;
+  border: 1px solid var(--input-border);
+  padding: 0.85rem 0.95rem;
+  color: var(--text-main);
+  font: inherit;
+  transition: 0.2s ease;
 }
 
 .form-group input:hover {
-    background-color: var(--bg-hover);
-    transform: scale(1.01);
+  background-color: var(--input-bg-hover);
 }
 
-form button {
-    background-color: var(--accent-main);
-    border-radius: 1rem;
-    border: 0;
-    padding: 1rem;
-    color: var(--text-main);
-    font-size: 1rem;
-    font-weight: 700;
+.form-group textarea:hover {
+  background-color: var(--input-bg-hover);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent-main);
+  background-color: var(--input-bg-focus);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-main);
+  background-color: var(--input-bg-focus);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.form-hint {
+  color: var(--text-muted);
+  font-size: 0.83rem;
+  line-height: 1.35;
+}
+
+.editprofile-card .settings-form button {
+  margin-left: auto;
+  border: none;
+  border-radius: 0.78rem;
+  padding: 0.85rem 1.1rem;
+  color: var(--btn-text);
+  font-size: 0.94rem;
+  font-weight: 700;
+  background-color: var(--btn-bg);
+  transition: 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 10px 22px -16px var(--accent-glow);
+}
+
+.editprofile-card .settings-form button:hover {
+  background-color: var(--btn-bg-hover);
+}
+
+.editprofile-card .settings-form button:active {
+  background-color: var(--btn-bg-active);
+}
+
+@media (max-width: 680px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .editprofile-card .settings-form button {
     width: 100%;
-    transition: all 0.3s ease;
-}
-
-form button:hover {
-    background-color: var(--accent-hover);
-    transform: scale(1.01);
-}
-
-form button:active {
-    background-color: var(--accent-active);
-    transform: scale(0.99);
+  }
 }

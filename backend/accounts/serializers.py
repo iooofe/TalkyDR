@@ -1,12 +1,11 @@
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
-from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth import authenticate
+from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth.password_validation import validate_passwords
 
 User = get_user_model()
 
 class RegistrationSerializer(serializers.ModelSerializer):
-        password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+        password = serializers.CharField(write_only=True, validators=[validate_password])
         password2 = serializers.CharField(write_only=True, required=True)
         
         class Meta:
@@ -15,12 +14,12 @@ class RegistrationSerializer(serializers.ModelSerializer):
         
         def validate(self, attrs):
             if attrs['password'] != attrs['password2']:
-                raise serializers.ValidationError({"password": "Пароли не сходятся"})
+                raise
             return attrs
         
         def create(self, validated_data):
             user = User.objects.create(
-                username = validated_data['username']
+                usename = validated_data['username']
             )
             user.set_password(validated_data['password'])
             user.save()
@@ -73,11 +72,13 @@ class EditProfileSerializer(serializers.ModelSerializer):
             "name",
             "discription",
             "age",
+            'avatar',
         )
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get("name", instance.name)
         instance.discription = validated_data.get("discription", instance.discription)
         instance.age = validated_data.get("age", instance.age)
+        instance.avatar = validated_data.get("avatar", instance.avatar)
         instance.save()
         return instance
