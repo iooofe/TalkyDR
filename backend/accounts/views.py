@@ -3,7 +3,6 @@ from .serializers import RegistrationSerializer, LoginSerializer, MeSerializer, 
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import User
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 
@@ -12,24 +11,21 @@ class RegistrationView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raises=True)
+        serializer.is_valid(raise_exception=True)
         
 
         user = serializer.save()
         refresh = RefreshToken.for_user(user)
-
-        users = User.objects.all()
         
         return Response({
             "refresh": str(refresh),
             "access": str(refresh.access_token),
             "user": {"username": user.username},
-            "users": str(users)
         }, status=status.HTTP_201_CREATED)
         
 class LoginView(APIView):
-    def post(self, s):
-        serializer = LoginSerializer(data=requtst.data)
+    def post(self, request):
+        serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         
         user = serializer.validated_data['user']

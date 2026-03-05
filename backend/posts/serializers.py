@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post, Like, Comment
+from .models import Post, Like, Comment, DisLike
 from .models import User
 
 class CreatePostSerializer(serializers.ModelSerializer):
@@ -24,6 +24,8 @@ class PostSerializer(serializers.ModelSerializer):
     comments_count = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     is_liked = serializers.SerializerMethodField()
+    dislikes_count = serializers.SerializerMethodField()
+    is_disliked = serializers.SerializerMethodField()
     author_username = serializers.CharField(source='author.username', read_only=True)
     author_name = serializers.CharField(source='author.name', read_only=True)
     author_avatar = serializers.SerializerMethodField()
@@ -43,7 +45,9 @@ class PostSerializer(serializers.ModelSerializer):
             "is_publish",
             "likes_count",
             "is_liked",
-            "comments_count"
+            "comments_count",
+            "is_disliked",
+            "dislikes_count",
         )
 
     def get_likes_count(self, obj):
@@ -64,8 +68,20 @@ class PostSerializer(serializers.ModelSerializer):
     
     def get_comments_count(self, obj):
         return Comment.objects.filter(post = obj).count()
+    
+    def get_dislikes_count(self, obj):
+        return DisLike.objects.filter(post=obj).count()
+
+    def get_is_disliked(self, obj):
+        request = self.context.get("request")
+        if not request or not request.user.is_authenticated:
+            return False
+        return DisLike.objects.filter(post=obj, user=request.user).exists()
+
 
 class PostCommnetCreateSerializer(serializers.ModelSerializer):
-    class meta:
+    class Meta:
         model = Comment
-        fields = "__all__"
+        fields = ("id", "post", "author", "text", "created_at")
+        read_only_fields = ("id", "post", "author", "created_at")
+

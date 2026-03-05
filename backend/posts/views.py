@@ -1,6 +1,6 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-from .serializers import CreatePostSerializer, PostSerializer
+from .serializers import CreatePostSerializer, PostSerializer, PostCommnetCreateSerializer
 from rest_framework.views import APIView
 from .models import Post, Like 
 from accounts.models import User
@@ -42,8 +42,17 @@ class PostLikeView(APIView):
         return Response(
             {"liked": False, "deleted": bool(deleted)}, status=status.HTTP_200_OK)
     
-class PostCommentView(APIView):
-    permission_classes = [IsAuthenticated]
+class PostCommentView(APIView): 
+    permission_classes = [IsAuthenticated] 
+ 
+    def post(self, request, post_id): 
+        
+        post = get_object_or_404(Post, id=post_id) 
+        
+        serializer = PostCommnetCreateSerializer(data=request.data) 
+        serializer.is_valid(raise_exception=True) 
+        
+        comment = serializer.save(post=post, author=request.user)
 
-    def post(self, request, post_id):
-        ...
+        return Response(serializer.data, status = status.HTTP_201_CREATED)
+    

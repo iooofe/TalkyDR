@@ -1,4 +1,4 @@
-m
+from django.contrib.auth.models import AbstractUser
 from django.db import models 
 
 
@@ -8,4 +8,5 @@ class User(AbstractUser):
     age = models.IntegerField(default = 0)
     discription = models.CharField(max_length = 90, default = None, null = True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    is_verify = models.BooleanField(default = False)
     

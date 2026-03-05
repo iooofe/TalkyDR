@@ -18,6 +18,14 @@ class Like(models.Model):
             models.UniqueConstraint(fields=["user", "post"], name="unique_user_post_like")
         ]
 
+class DisLike(models.Model):
+    post = models.ForeignKey(Post, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["user", "post"], name="unique_user_post_dislike")
+        ]
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete = models.CASCADE, related_name="comments")
